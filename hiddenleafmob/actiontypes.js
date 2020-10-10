@@ -1,0 +1,4 @@
+export default {
+  SIGNIN_USER: 'SIGNIN_USER',
+  SIGNIN_USER_SUCCESS: 'SIGNIN_USER_SUCCESS',
+};
