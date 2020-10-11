@@ -1,19 +1,27 @@
 import React, {useEffect} from 'react';
-import {AsyncStorage, View, Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {View, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// containers
 import Home from '../containers/Home/home';
 import Login from '../containers/Login/login';
 import Register from '../containers/Register/register';
+import Dashboard from '../containers/Dashboard/dashboard';
+import Delivery from '../containers/Delivery/delivery';
+import NewOrder from '../containers/NewOrder/neworder';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const MainNav = () => {
   const {isLoggedIn} = useSelector((state) => state.user);
   const {isLoading} = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  // fetch token from local storage & authenticate
   useEffect(() => {
     const bootstrapAsync = async () => {
       let userToken = '';
@@ -28,6 +36,7 @@ const MainNav = () => {
     bootstrapAsync();
   }, []);
 
+  // wait while token is fetched
   if (isLoading === true)
     return (
       <View>
@@ -37,18 +46,20 @@ const MainNav = () => {
   else {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          {isLoggedIn === false ? (
-            <>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Signup" component={Register} />
-            </>
-          ) : (
-            <>
-              <Stack.Screen name="Home" component={Home} />
-            </>
-          )}
-        </Stack.Navigator>
+        {isLoggedIn === false ? (
+          <Stack.Navigator>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Signup" component={Register} />
+          </Stack.Navigator>
+        ) : (
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Deliveries" component={Delivery} />
+            <Tab.Screen name="+" component={NewOrder} />
+            <Tab.Screen name="Dashboard" component={Dashboard} />
+            <Tab.Screen name="Profile" component={Dashboard} />
+          </Tab.Navigator>
+        )}
       </NavigationContainer>
     );
   }
