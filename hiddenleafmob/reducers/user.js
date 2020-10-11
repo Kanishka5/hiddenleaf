@@ -1,30 +1,31 @@
-import {AsyncStorage} from 'react-native';
 import actions from '../actionTypes';
 
-const _retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('siginToken');
-    return value;
-  } catch (error) {
-    // Error retrieving data
-    return '';
-  }
-};
-
 const defaultState = {
-  isLoggedIn: _retrieveData() === '' ? false : true,
-  userToken: _retrieveData(),
-  signinError: '',
+  isLoading: true,
+  isLoggedIn: false,
+  userToken: null,
 };
 
 const user = (state = defaultState, action) => {
-  console.log(state);
   switch (action.type) {
     case actions.SIGNIN_USER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
         userToken: action.token,
+      };
+    case actions.RESTORE_TOKEN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: action.token === null ? false : true,
+        userToken: action.token,
+      };
+    case actions.SIGNOUT_USER_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: false,
+        userToken: '',
       };
     default:
       return state;
