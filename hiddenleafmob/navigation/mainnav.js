@@ -12,6 +12,7 @@ import Register from '../containers/Register/register';
 import Dashboard from '../containers/Dashboard/dashboard';
 import Delivery from '../containers/Delivery/delivery';
 import NewOrder from '../containers/NewOrder/neworder';
+import Currorder from '../containers/OrderDtl/orderdtl';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +37,19 @@ const MainNav = () => {
     bootstrapAsync();
   }, []);
 
+  const HomeStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Detail" component={Currorder} />
+      </Stack.Navigator>
+    );
+  };
+
   // wait while token is fetched
   if (isLoading === true)
     return (
@@ -53,7 +67,7 @@ const MainNav = () => {
           </Stack.Navigator>
         ) : (
           <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={HomeStack} />
             <Tab.Screen name="Deliveries" component={Delivery} />
             <Tab.Screen name="+" component={NewOrder} />
             <Tab.Screen name="Dashboard" component={Dashboard} />

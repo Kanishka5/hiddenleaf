@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import styles from './style';
+import actions from '../../actionTypes';
 
 const NewOrder = ({navigation}) => {
   const [orderId, setOrderId] = useState(null);
+  const dispatch = useDispatch();
+
   const onSuccess = (e) => {
     setOrderId(e.data);
+    dispatch({
+      type: actions.ADD_ORDER,
+      payload: e.data,
+    });
     console.log(e.data);
     // navigation.goBack();
   };
