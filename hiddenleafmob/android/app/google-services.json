@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "78660405750",
+    "firebase_url": "https://hiddenleaf-b24c3.firebaseio.com",
+    "project_id": "hiddenleaf-b24c3",
+    "storage_bucket": "hiddenleaf-b24c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78660405750:android:13c4e0c9e1457ce0bb5fd7",
+        "android_client_info": {
+          "package_name": "com.hiddenleafmob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78660405750-ea6gk0lfdaedc4oqndgpmulb4ooesd4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAerEPMcBuao16nWVP7my6f9CROhgaMMgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78660405750-ea6gk0lfdaedc4oqndgpmulb4ooesd4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
